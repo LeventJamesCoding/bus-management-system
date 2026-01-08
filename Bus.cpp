@@ -1,4 +1,3 @@
-#pragma once
 #include "Bus.h"
 #include <sstream>
 #include <iomanip>

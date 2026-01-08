@@ -20,6 +20,5 @@ public:
     string getArrival() const;
     int getDistance() const;
 
-    // Default Argument Value Assignment
     double calculateEstimatedTime(int avgSpeedKmH = 80) const;
 };

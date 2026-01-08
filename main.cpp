@@ -10,9 +10,9 @@ int main() {
 
     BusFleetManager fleetManager(centralBusData);
     ReservationManager reservationManager(centralBusData);
+    fleetManager.loadFromFile(buses.txt);
 
     int choice;
-
     do {
         displayMenu();
 
@@ -25,7 +25,23 @@ int main() {
         }
 
         switch (choice) {
-        case 1: fleetManager.addNewBus(); break;
+        case 1: {
+            int no;
+            string plate, driver;
+            cout << "Enter Bus Number: "; cin >> no;
+            cout << "Enter Plate: "; cin >> plate;
+            cout << "Enter Driver: "; cin >> driver;
+            bool success = fleetManager.addNewBus(no, plate, driver);
+
+            if(success){
+                cout << "Bus added successfully";
+                fleetManager.saveToFile("buses.txt");
+            }
+            else{
+                cout << "Bus number already exists";
+            }
+            break;
+        }
         case 2: reservationManager.makeReservation(); break;
         case 3: fleetManager.displayAllData(); break;
         case 4: reservationManager.displaySeatDetails(); break;
@@ -33,6 +49,7 @@ int main() {
             int no;
             cout << "Enter Bus No to remove: "; cin >> no;
             fleetManager.removeBusByNumber(no);
+            fleet.Manager.saveToFile("buses.txt");
             break;
         }
         case 0:

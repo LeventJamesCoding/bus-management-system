@@ -1,6 +1,4 @@
-#ifndef BASEMANAGER_H
-#define BASEMANAGER_H
-
+#pragma once
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -25,5 +23,3 @@ public:
 
     Bus* getBusByNumber(int no);
 };
-
-#endif

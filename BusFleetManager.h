@@ -1,13 +1,17 @@
 #pragma once
-#include "BaseManager.h" 
+#include "BaseManager.h"
+#include <string>
+#include <vector>
 
-class BusFleetManager : public BaseManager { 
+class BusFleetManager : public BaseManager {
 public:
     BusFleetManager(vector<Bus>& busList);
 
-    void addNewBus();
-    void removeBusByNumber(int no);
-    void updateBusDetails(int no);
-    void checkBusExists(int no) const;
-    void displayAllData() const override; 
+    bool addNewBus(int no, std::string plate, std::string driver);
+    bool removeBusByNumber(int no);
+    const std::vector<Bus>& getAllBuses() const;
+    bool isBusExists(int no) const;
+
+    void saveToFile(const string& fileName);
+    void loadFromFile(const string& fileName);
 };
