@@ -1,66 +1,76 @@
 #include "ReservationManager.h"
-#include <limits> // for cin.ignore
-#include "Utilities.h"
+#include <iomanip>
 
-ReservationManager::ReservationManager(vector<Bus>& busList) : BaseManager(busList) {}
-
-void ReservationManager::makeReservation() {
-    int no, seat;
-    string name;
-
-    BaseManager::displayAllData(); 
-    displayHeader("Make Reservation");
-    cout << "Enter Bus Number: ";
-    if (!(cin >> no)) { displayError("Invalid Bus Number input."); return; }
-
-    Bus* bus = getBusByNumber(no); 
-    if (bus == nullptr) {
-        displayError("Bus " + to_string(no) + " not found.");
-        return;
-    }
-
-    bus->displaySeatLayout();
-    cout << "Passenger Name: "; cin.ignore(); getline(cin, name);
-    cout << "Seat Number (1-" << bus->getCapacity() << "): ";
-    if (!(cin >> seat)) { displayError("Invalid Seat input."); return; }
-
-    if (bus->reserveSeat(seat, name)) {
-        cout << "Success: Reservation confirmed for " << name << " on seat " << seat << "." << endl;
-    }
-    else {
-        displayError("Seat " + to_string(seat) + " is already taken or invalid.");
-    }
+ReservationManager::ReservationManager() {
+    nextReservationId = 1000; 
 }
 
-void ReservationManager::displaySeatDetails() {
-    int no;
-    displayHeader("Display Seat Details");
-    cout << "Enter Bus Number: ";
-    if (!(cin >> no)) { displayError("Invalid Bus Number input."); return; }
-
-    Bus* bus = findBus(no); 
-
-    if (bus) {
-        bus->displaySeatLayout();
-    }
-    else {
-        displayError("Bus " + to_string(no) + " not found.");
-    }
-}
-
-Bus* ReservationManager::findBus(int no) {
-    return getBusByNumber(no); 
-}
-
-vector<Bus*> ReservationManager::findBus(const string& dep, const string& arr) {
-    vector<Bus*> results;
-    for (auto& bus : buses) {
-        if (bus.getRouteInfo().getDeparture() == dep &&
-            bus.getRouteInfo().getArrival() == arr) {
-            results.push_back(&bus);
+bool ReservationManager::isSeatOccupied(const std::string& tripId, int seatNumber) {
+    for (const auto& res : reservations) {
+        if (res.tripId == tripId && res.seatNumber == seatNumber && res.isActive) {
+            return true;
         }
     }
-    return results;
+    return false;
 }
 
-void ReservationManager::showAvailableRoutes() const {  }
+bool ReservationManager::createReservation(int passengerId, const std::string& tripId, int seatNumber) {
+    if (isSeatOccupied(tripId, seatNumber)) {
+        std::cout << "[Error] Seat " << seatNumber << " is already occupied for Trip " << tripId << ".\n";
+        return false;
+    }
+
+    Reservation newRes;
+    newRes.reservationId = nextReservationId++;
+    newRes.passengerId = passengerId;
+    newRes.tripId = tripId;
+    newRes.seatNumber = seatNumber;
+    newRes.isActive = true;
+
+    reservations.push_back(newRes);
+    
+    std::cout << "[Success] Reservation created. ID: " << newRes.reservationId << "\n";
+    return true;
+}
+
+bool ReservationManager::cancelReservation(int reservationId) {
+    for (auto& res : reservations) {
+        if (res.reservationId == reservationId) {
+            if (!res.isActive) {
+                std::cout << "[Info] Reservation is already cancelled.\n";
+                return false;
+            }
+            res.isActive = false;
+            std::cout << "[Success] Reservation " << reservationId << " cancelled.\n";
+            return true;
+        }
+    }
+    std::cout << "[Error] Reservation ID not found.\n";
+    return false;
+}
+
+void ReservationManager::displayAllReservations() const {
+    std::cout << "\n--- All Active Reservations ---\n";
+    std::cout << "ID      | Passenger ID | Trip ID | Seat \n";
+    std::cout << "----------------------------------------\n";
+    
+    for (const auto& res : reservations) {
+        if (res.isActive) {
+            std::cout << std::left << std::setw(8) << res.reservationId 
+                      << " | " << std::setw(12) << res.passengerId 
+                      << " | " << std::setw(7) << res.tripId 
+                      << " | " << res.seatNumber << "\n";
+        }
+    }
+    std::cout << "----------------------------------------\n";
+}
+
+std::vector<Reservation> ReservationManager::getReservationsByTrip(const std::string& tripId) {
+    std::vector<Reservation> tripReservations;
+    for (const auto& res : reservations) {
+        if (res.tripId == tripId && res.isActive) {
+            tripReservations.push_back(res);
+        }
+    }
+    return tripReservations;
+}

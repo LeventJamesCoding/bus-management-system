@@ -1,21 +1,29 @@
-#ifndef RESERVATIONMANAGER_H
-#define RESERVATIONMANAGER_H
+#pragma once
+#include <string>
+#include <vector>
+#include <iostream>
 
-#include "BaseManager.h"
-
-class ReservationManager : public BaseManager { 
-public:
-    ReservationManager(vector<Bus>& busList);
-
-    void makeReservation();
-    void displaySeatDetails();
-    void showAvailableRoutes() const;
-
-    Bus* findBus(int no);
-
-    vector<Bus*> findBus(const string& dep, const string& arr);
-
-    ReservationManager() = default;
+struct Reservation {
+    int reservationId;
+    int passengerId;
+    std::string tripId; 
+    int seatNumber;
+    bool isActive;
 };
 
-#endif 
+class ReservationManager {
+private:
+    std::vector<Reservation> reservations;
+    int nextReservationId;
+
+    bool isSeatOccupied(const std::string& tripId, int seatNumber);
+
+public:
+    ReservationManager();
+
+    bool createReservation(int passengerId, const std::string& tripId, int seatNumber);
+    bool cancelReservation(int reservationId);
+    void displayAllReservations() const;
+    
+    std::vector<Reservation> getReservationsByTrip(const std::string& tripId);
+};
