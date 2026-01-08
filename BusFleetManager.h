@@ -12,6 +12,7 @@ public:
     const std::vector<Bus>& getAllBuses() const;
     bool isBusExists(int no) const;
 
+    //operational functions for I/O.
     void saveToFile(const string& fileName);
     void loadFromFile(const string& fileName);
 };
