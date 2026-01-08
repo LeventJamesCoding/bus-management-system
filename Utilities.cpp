@@ -1,5 +1,18 @@
 ﻿#include "Utilities.h"
 #include <iomanip>
+#include <sstream>
+
+using namespace std;
+
+void displayHeader(const string& title) {
+    cout << "\n=============================================\n";
+    cout << title << "\n";
+    cout << "=============================================\n";
+}
+
+void displayError(const string& message) {
+    cout << "\n--- ERROR: " << message << " ---\n";
+}
 
 void displayMenu() {
     displayHeader("Bus Management System (Phase 1)");
@@ -13,12 +26,24 @@ void displayMenu() {
     cout << "Enter your choice: ";
 }
 
-void displayHeader(const string& title) {
-    cout << "\n=============================================" << endl;
-    cout << title << endl;
-    cout << "=============================================" << endl;
+int timeToMinutes(const string& timeStr) {
+    int h, m;
+    char colon;
+    stringstream ss(timeStr);
+    ss >> h >> colon >> m;
+    return h * 60 + m;
 }
 
-void displayError(const string& message) {
-    cerr << "--- ERROR: " << message << " ---" << endl;
+string minutesToTime(int totalMinutes) {
+    int h = (totalMinutes / 60) % 24;
+    int m = totalMinutes % 60;
+    stringstream ss;
+    ss << setfill('0') << setw(2) << h << ":" 
+       << setfill('0') << setw(2) << m;
+    return ss.str();
+}
+
+string addMinutesToTime(const string& timeStr, int minutesToAdd) {
+    int currentMins = timeToMinutes(timeStr);
+    return minutesToTime(currentMins + minutesToAdd);
 }

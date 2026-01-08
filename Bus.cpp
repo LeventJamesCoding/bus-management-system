@@ -2,19 +2,23 @@
 #include <sstream>
 #include <iomanip>
 
-Bus::Bus(int no, const string& plate, const string& driver, const string& depTime, int fr,
-    const string& dep, const string& arr, int dist)
+// Constructor güncellendi
+Bus::Bus(int no, const string& plate, const string& driver, 
+         const string& depTime, const string& arrTime,
+         int fr, const string& dep, const string& arr, int dist)
     : busNumber(no), licensePlate(plate), driverName(driver),
-    routeInfo(dep, arr, dist), departureTime(depTime), fare(fr) {
+    routeInfo(dep, arr, dist), departureTime(depTime), arrivalTime(arrTime), fare(fr) {
     seats.resize(capacity, "EMPTY");
 }
 
 void Bus::displayBusInfo() const {
     cout << left << setw(8) << busNumber
         << setw(15) << licensePlate
-        << setw(20) << driverName // YENİ EKLENDİ (Header ile aynı hizada)
-        << setw(15) << routeInfo.getDeparture()
-        << setw(15) << routeInfo.getArrival()
+        << setw(20) << driverName
+        << setw(15) << routeInfo.getDeparture() 
+        << setw(15) << routeInfo.getArrival()   
+        << setw(10) << departureTime            
+        << setw(10) << arrivalTime              // YENİ SÜTUN
         << setw(10) << getFare()
         << countEmptySeats() << "/" << capacity << endl;
 }
@@ -42,9 +46,11 @@ bool Bus::reserveSeat(int seatNumber, const string& passengerName) {
 
 string Bus::toSaveString() const {
     stringstream ss;
-    ss << busNumber << "," << licensePlate << "," << driverName << ","
-        << departureTime << "," << fare << "," << routeInfo.getDeparture() << ","
-        << routeInfo.getArrival() << "," << routeInfo.getDistance();
-    for (const auto& seat : seats) { ss << "," << seat; }
+    // Format: ID|Plate|Driver|DepTime|ArrTime|Fare|Origin|Dest|Dist|Seats...
+    ss << busNumber << "|" << licensePlate << "|" << driverName << "|"
+       << departureTime << "|" << arrivalTime << "|" << fare << "|" 
+       << routeInfo.getDeparture() << "|" << routeInfo.getArrival() << "|" << routeInfo.getDistance();
+       
+    for (const auto& seat : seats) { ss << "|" << seat; }
     return ss.str();
 }

@@ -16,13 +16,14 @@ private:
 
     Route routeInfo; 
     string departureTime;
+    string arrivalTime;
     int fare;
     vector<string> seats;
 
 public:
     Bus(int no = 0, const string& plate = "N/A", const string& driver = "N/A",
-        const string& depTime = "N/A", int fr = 0,
-        const string& dep = "", const string& arr = "", int dist = 0);
+        const string& depTime = "N/A", const string& arrTime = "N/A", 
+        int fr = 0, const string& dep = "", const string& arr = "", int dist = 0);
 
     // Getters
     int getBusNumber() const { return busNumber; }
@@ -30,6 +31,8 @@ public:
     string getDriverName() const { return driverName; }
     int getCapacity() const { return capacity; }
     int getFare() const { return fare; }
+    string getDepartureTime() const { return departureTime; }
+    string getArrivalTime() const { return arrivalTime; } // YENİ GETTER
     const Route& getRouteInfo() const { return routeInfo; }
     const vector<string>& getSeats() const { return seats; }
 
@@ -38,7 +41,6 @@ public:
     int countEmptySeats() const;
 
     bool reserveSeat(int seatNumber);
-
     bool reserveSeat(int seatNumber, const string& passengerName);
 
     string toSaveString() const;

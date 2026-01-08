@@ -15,4 +15,6 @@ public:
     //operational functions for I/O.
     void saveToFile(const string& fileName);
     void loadFromFile(const string& fileName);
+    
+    void generateDailySchedule();
 };
