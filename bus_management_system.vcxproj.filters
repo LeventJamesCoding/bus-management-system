@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Route.cpp">
+      <Filter>Entities\Route</Filter>
+    </ClCompile>
+    <ClCompile Include="Bus.cpp">
+      <Filter>Entities\Bus</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseManager.cpp">
+      <Filter>Managers\BaseManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BusFleetManager.cpp">
+      <Filter>Managers\BusFleetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ReservationManager.cpp">
+      <Filter>Managers\ReservationManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{f5e9965b-5e32-4327-a9d5-76678becc426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{521c35bf-3d99-48be-978f-b279af5ebf90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Route">
+      <UniqueIdentifier>{96333b75-f5e1-441c-8016-26e07e9efcbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Bus">
+      <UniqueIdentifier>{8bfd5a71-eacf-4b9c-8aac-b09ae08f75b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{a66d2a08-6d6f-4cbe-a229-f622ca06d582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\BaseManager">
+      <UniqueIdentifier>{14e79b17-16d8-4e10-b8e2-377ba7cd27d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\BusFleetManager">
+      <UniqueIdentifier>{eaeb8586-a599-4250-af74-c79f778b23d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\ReservationManager">
+      <UniqueIdentifier>{881c3147-64d7-4aea-8e17-d7518755d687}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Route.h">
+      <Filter>Entities\Route</Filter>
+    </ClInclude>
+    <ClInclude Include="Bus.h">
+      <Filter>Entities\Bus</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseManager.h">
+      <Filter>Managers\BaseManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BusFleetManager.h">
+      <Filter>Managers\BusFleetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ReservationManager.h">
+      <Filter>Managers\ReservationManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

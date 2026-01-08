@@ -1,0 +1,47 @@
+#include <limits> 
+#include <vector>
+#include "Bus.h"
+#include "BusFleetManager.h"
+#include "ReservationManager.h"
+#include "Utilities.h"
+
+int main() {
+    vector<Bus> centralBusData;
+
+    BusFleetManager fleetManager(centralBusData);
+    ReservationManager reservationManager(centralBusData);
+
+    int choice;
+
+    do {
+        displayMenu();
+
+        if (!(cin >> choice)) {
+            displayError("Invalid input! Please enter a number.");
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            choice = -1;
+            continue;
+        }
+
+        switch (choice) {
+        case 1: fleetManager.addNewBus(); break;
+        case 2: reservationManager.makeReservation(); break;
+        case 3: fleetManager.displayAllData(); break;
+        case 4: reservationManager.displaySeatDetails(); break;
+        case 5: {
+            int no;
+            cout << "Enter Bus No to remove: "; cin >> no;
+            fleetManager.removeBusByNumber(no);
+            break;
+        }
+        case 0:
+            displayHeader("Exiting system and saving data...");
+            break;
+        default:
+            displayError("Invalid selection.");
+        }
+    } while (choice != 0);
+
+    return 0;
+}
