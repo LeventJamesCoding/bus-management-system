@@ -18,19 +18,21 @@ void BaseManager::displayAllData() const {
         return;
     }
     displayHeader("Bus Listing");
+    
     cout << left << setw(8) << "No"
         << setw(15) << "Plate"
-        << setw(20) << "Departure"
-        << setw(20) << "Arrival"
+        << setw(20) << "Driver"
+        << setw(15) << "Departure" 
+        << setw(15) << "Arrival"
         << setw(10) << "Fare"
         << "Seats" << endl;
-    cout << string(83, '-') << endl;
+        
+    cout << string(95, '-') << endl; 
 
     for (const auto& bus : buses) {
         bus.displayBusInfo();
     }
 }
-
 void BaseManager::showSystemStatus() const {
     cout << "System Status: Managing " << buses.size() << " active bus routes." << endl;
 }

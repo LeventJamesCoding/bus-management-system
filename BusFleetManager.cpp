@@ -1,5 +1,6 @@
 #include "BusFleetManager.h"
 #include <algorithm>
+#include <sstream>
 
 BusFleetManager::BusFleetManager(vector<Bus>& busList) : BaseManager(busList) {}
 
@@ -42,7 +43,7 @@ bool BusFleetManager::isBusExists(int no) const {
 }
 
 void BusFleetManager::saveToFile(const std::string& filename) {
-    std::ofstream file(filename); 
+    std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file for saving.\n";
         return;
@@ -50,7 +51,7 @@ void BusFleetManager::saveToFile(const std::string& filename) {
 
     for (const auto& bus : buses) {
         file << bus.getBusNumber() << "|" 
-             << bus.getPlateNumber() << "|" 
+             << bus.getLicensePlate() << "|" 
              << bus.getDriverName() << "\n";
     }
     

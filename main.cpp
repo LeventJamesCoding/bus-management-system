@@ -10,7 +10,7 @@ int main() {
 
     BusFleetManager fleetManager(centralBusData);
     ReservationManager reservationManager(centralBusData);
-    fleetManager.loadFromFile(buses.txt);
+    fleetManager.loadFromFile("buses.txt");
 
     int choice;
     do {
@@ -49,7 +49,7 @@ int main() {
             int no;
             cout << "Enter Bus No to remove: "; cin >> no;
             fleetManager.removeBusByNumber(no);
-            fleet.Manager.saveToFile("buses.txt");
+            fleetManager.saveToFile("buses.txt");
             break;
         }
         case 0:

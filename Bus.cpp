@@ -12,8 +12,9 @@ Bus::Bus(int no, const string& plate, const string& driver, const string& depTim
 void Bus::displayBusInfo() const {
     cout << left << setw(8) << busNumber
         << setw(15) << licensePlate
-        << setw(20) << routeInfo.getDeparture()
-        << setw(20) << routeInfo.getArrival()
+        << setw(20) << driverName // YENİ EKLENDİ (Header ile aynı hizada)
+        << setw(15) << routeInfo.getDeparture()
+        << setw(15) << routeInfo.getArrival()
         << setw(10) << getFare()
         << countEmptySeats() << "/" << capacity << endl;
 }
