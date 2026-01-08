@@ -7,7 +7,6 @@
 #include <map>
 #include <queue>
 
-// --- EKSİK OLAN TANIMLAR BURAYA EKLENDİ ---
 struct SimBus {
     int id;
     int readyAtMinute; 
@@ -21,10 +20,13 @@ struct RouteDef {
     int fare;
     int dist;
 };
-// ------------------------------------------
 
 BusFleetManager::BusFleetManager(vector<Bus>& busList) : BaseManager(busList) {
-    // Constructor
+    
+}
+
+BusFleetManager::BusFleetManager(){
+
 }
 
 bool BusFleetManager::addNewBus(int no, std::string plate, std::string driver) {
@@ -198,4 +200,17 @@ void BusFleetManager::loadFromFile(const std::string& filename) {
     }
     file.close();
     std::cout << "Data loaded from " << filename << "\n";
+}
+
+Trip* BusFleetManager::getTripById(const std::string& id) {
+    for (size_t i = 0; i < allTrips.size(); i++) {
+        if (allTrips[i].tripId == id) {
+            return &allTrips[i]; 
+        }
+    }
+    return nullptr;
+}
+
+void BusFleetManager::addTrip(const Trip& trip){
+    allTrips.push_back(trip);
 }

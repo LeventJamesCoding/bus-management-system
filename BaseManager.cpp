@@ -4,8 +4,11 @@
 #include "Utilities.h"
 #include <iomanip>
 
-BaseManager::BaseManager(vector<Bus>& busList) : buses(busList) {
-    loadBusData();
+BaseManager::BaseManager(vector<Bus> busList) {
+    buses = busList; 
+}
+BaseManager::BaseManager() {
+    loadBusData(); 
 }
 
 BaseManager::~BaseManager() {
@@ -14,11 +17,10 @@ BaseManager::~BaseManager() {
 
 void BaseManager::displayAllData() const {
     if (buses.empty()) {
-        displayError("No registered buses found in the system.");
+        cout << "[Info] No registered buses found in the system." << endl;
         return;
     }
-    displayHeader("Bus Listing");
-    
+    cout << "\n--- Bus Listing ---\n";
     cout << left << setw(8) << "No"
         << setw(15) << "Plate"
         << setw(20) << "Driver"
@@ -30,9 +32,10 @@ void BaseManager::displayAllData() const {
     cout << string(95, '-') << endl; 
 
     for (const auto& bus : buses) {
-        bus.displayBusInfo();
+        cout << bus.getBusNumber() << "..." << endl; 
     }
 }
+
 void BaseManager::showSystemStatus() const {
     cout << "System Status: Managing " << buses.size() << " active bus routes." << endl;
 }
@@ -47,9 +50,9 @@ Bus* BaseManager::getBusByNumber(int no) {
 }
 
 void BaseManager::loadBusData() {
-    cout << "Data load attempted." << endl;
+    cout << "[System] Data load attempted from " << FILE_NAME << "." << endl;
 }
 
 void BaseManager::saveBusData() {
-    cout << "Data saved successfully on exit." << endl;
+    cout << "[System] Data saved successfully on exit." << endl;
 }
