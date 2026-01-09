@@ -23,9 +23,8 @@ public:
     const std::vector<Bus>& getAllBuses() const;
     bool isBusExists(int no) const;
 
-    //operational functions for I/O.
-    void saveToFile(const string& fileName);
-    void loadFromFile(const string& fileName);
+    void saveToFile(const string& fileName); //not implemented
+    void loadFromFile(const string& fileName); //
     
     void generateDailySchedule();
     Trip* getTripById(const std::string& id);

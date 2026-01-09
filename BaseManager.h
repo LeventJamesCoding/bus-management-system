@@ -4,8 +4,6 @@
 #include <iostream>
 #include "Bus.h"
 
-using namespace std;
-
 class BaseManager {
 protected:
     vector<Bus> buses; 
@@ -22,7 +20,7 @@ public:
     virtual ~BaseManager();
 
     virtual void displayAllData() const;
-    virtual void showSystemStatus() const;
+    virtual void showSystemStatus() const; 
 
-    Bus* getBusByNumber(int no);
+    Bus* getBusByNumber(int no); //
 };

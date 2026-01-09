@@ -21,13 +21,9 @@ struct RouteDef {
     int dist;
 };
 
-BusFleetManager::BusFleetManager(vector<Bus>& busList) : BaseManager(busList) {
-    
-}
+BusFleetManager::BusFleetManager(vector<Bus>& busList) : BaseManager(busList) {}
 
-BusFleetManager::BusFleetManager(){
-
-}
+BusFleetManager::BusFleetManager(){}
 
 bool BusFleetManager::addNewBus(int no, std::string plate, std::string driver) {
     if (isBusExists(no)) return false;
@@ -81,7 +77,6 @@ void BusFleetManager::generateDailySchedule() {
 
     while (currentMins <= endMins) {
         
-        // Gelenleri havuza aktar
         for (auto it = transitList.begin(); it != transitList.end(); ) {
             if (it->first <= currentMins) {
                 busPools[it->second.first].push({it->second.second, it->first, ""});
@@ -91,7 +86,6 @@ void BusFleetManager::generateDailySchedule() {
             }
         }
 
-        // Seferleri Başlat
         for (int r = 0; r < 3; r++) {
             RouteDef& rt = routes[r];
             string routeId = to_string(r);

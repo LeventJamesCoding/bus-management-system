@@ -82,7 +82,7 @@ void ReservationManager::displayAllReservations(BusFleetManager& fleetMgr) const
             std::cout << std::left 
                       << std::setw(10) << res.reservationId 
                       << std::setw(12) << res.passengerId 
-                      << std::setw(10) << res.tripId 
+                      << std::setw(15) << res.tripId 
                       << std::setw(30) << routeInfo
                       << std::setw(8)  << res.seatNumber << "\n";
         }
