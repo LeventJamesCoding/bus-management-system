@@ -25,7 +25,7 @@ public:
         const string& depTime = "N/A", const string& arrTime = "N/A", 
         int fr = 0, const string& dep = "", const string& arr = "", int dist = 0);
 
-    // Getters
+    //getters
     int getBusNumber() const { return busNumber; }
     string getLicensePlate() const { return licensePlate; }
     string getDriverName() const { return driverName; }
